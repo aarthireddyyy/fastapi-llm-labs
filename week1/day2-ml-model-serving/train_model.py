@@ -1,17 +1,20 @@
-# week1-fastapi-llm/day2-ml-model-serving/train_model.py
-import pickle
-from sklearn.linear_model import LinearRegression
-import numpy as np
+# train_model.py
+from sklearn.datasets import load_iris
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+import joblib
 
-# toy dataset
-X = np.array([[1],[2],[3],[4],[5]])
-y = np.array([2,4,6,8,10])  # y = 2*x
+def train_and_save(path="model.pkl"):
+    data = load_iris()
+    X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, random_state=42)
+    model = RandomForestClassifier(n_estimators=50, random_state=42)
+    model.fit(X_train, y_train)
+    print("Train score:", model.score(X_test, y_test))
+    joblib.dump({
+        "model": model,
+        "target_names": data.target_names.tolist()
+    }, path)
+    print("Saved model to", path)
 
-model = LinearRegression()
-model.fit(X, y)
-
-# Save model (this creates model.pkl)
-with open("model.pkl", "wb") as f:
-    pickle.dump(model, f)
-
-print("Saved toy model to model.pkl")
+if __name__ == "__main__":
+    train_and_save()
