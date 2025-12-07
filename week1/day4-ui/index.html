@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Local LLM Chat (FastAPI + Ollama)</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 700px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    #chat {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 12px;
+      height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      margin-bottom: 12px;
+      background: #fafafa;
+    }
+    .input-row {
+      display: flex;
+      gap: 8px;
+    }
+    textarea {
+      flex: 1;
+      resize: vertical;
+      min-height: 60px;
+      font-family: inherit;
+    }
+    button {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .user { font-weight: 600; }
+    .assistant { color: #1d4ed8; }
+    .error { color: #b91c1c; }
+  </style>
+</head>
+<body>
+  <h1>Local LLM Chat</h1>
+  <p>Backend: FastAPI → Ollama (<code>/chat</code>)</p>
+
+  <div id="chat"></div>
+
+  <div class="input-row">
+    <textarea id="message" placeholder="Ask something..."></textarea>
+    <button id="sendBtn">Send</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

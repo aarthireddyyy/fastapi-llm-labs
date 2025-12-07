@@ -1,15 +1,23 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware
 from schemas import ChatRequest
 from services.ollama_service import stream_from_ollama
 import json
 
 app = FastAPI(title="LLM Local Proxy (Ollama) - Clean Text Stream")
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # for learning; later you can restrict
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.get("/")
 def root():
     return {"status": "ok"}
-
 
 @app.post("/chat")
 def chat(req: ChatRequest):
