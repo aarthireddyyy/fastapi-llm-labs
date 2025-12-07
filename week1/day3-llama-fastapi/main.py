@@ -1,11 +1,10 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import StreamingResponse
-from .schemas import ChatRequest
-from .services.ollama_service import stream_from_ollama
+from schemas import ChatRequest
+from services.ollama_service import stream_from_ollama
 import json
 
 app = FastAPI(title="LLM Local Proxy (Ollama) - Clean Text Stream")
-
 
 @app.get("/")
 def root():
